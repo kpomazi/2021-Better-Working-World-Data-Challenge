@@ -42,6 +42,10 @@ if ! [[ $LOCAL = "true" ]]; then
   try pip3 install --upgrade pip
   try pip3 install docker-compose
   
+  add-apt-repository ppa:graphics-drivers/ppa
+  apt update
+  apt install nvidia-450
+  
   curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
   distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
   curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
