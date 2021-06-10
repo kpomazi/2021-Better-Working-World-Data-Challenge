@@ -13,7 +13,6 @@ services:
   
   jupyter:
     image: geoscienceaustralia/sandbox
-    runtime: nvidia
     environment:
       - DB_HOSTNAME=postgres
       - DB_USERNAME=opendatacube
@@ -21,7 +20,6 @@ services:
       - DB_DATABASE=opendatacube
       - AWS_NO_SIGN_REQUEST=true
       - AWS_DEFAULT_REGION=ap-southeast-2
-      - NVIDIA_VISIBLE_DEVICES=all
     ports:
       - "80:8888"
     volumes:
@@ -32,3 +30,10 @@ services:
       - postgres
     restart: always
     command: jupyter notebook --allow-root --ip="0.0.0.0" --NotebookApp.token='secretpassword'
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu, utility]
