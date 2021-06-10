@@ -49,18 +49,6 @@ if ! [[ $LOCAL = "true" ]]; then
   sudo apt-get install -y nvidia-docker2
   sudo pkill -SIGHUP dockerd
   
-  sudo tee /etc/docker/daemon.json <<EOF
-  {
-      "default-runtime": "nvidia"
-      "runtimes": {
-          "nvidia": {
-              "path": "/usr/bin/nvidia-container-runtime",
-              "runtimeArgs": []
-          }
-      }
-  }
-  EOF
-
   # Get our code
   url=https://codeload.github.com/kpomazi/2021-Better-Working-World-Data-Challenge/zip/main
   try wget $url -O /tmp/archive.zip 
